@@ -68,7 +68,8 @@ $("#design").on('change',function(){
 //”Register for Activities” section of the form ==========================================
 $(".activities :checkbox").on('change', function(){
     let total= 0;
-    
+
+// The code below is also work for this part but I prefer using anthoer logic that I got later, so I comment this part here.
 /*    if($("input[type='checkbox']:eq(0)").is(":checked")){
         total+=200;
         console.log("first checked");
@@ -154,13 +155,15 @@ $("form").submit(function(){
     $('label').removeAttr("style");
     let status = true;
     
+    //name section
     if($("#name").val()==''){
         $("label[for='name']").attr("style","color:red; font-weight:bold");
         $("label[for='name']").append("<span>(please provide your name)</span>")
         status = false;
     }
     
-    /*let at = $("#mail").val().indexOf("@");
+    //email section
+    /*let at = $("#mail").val().indexOf("@"); <-------------------------------QUESTION HERE!
     let dot = $("#mail").val().lastIndexOf(".");*/
     if($("#mail").val()==''|| $("#mail").val().indexOf("@")<1|| $("#mail").val().lastIndexOf(".")<$("#mail").val().indexOf("@")+2|| $("#mail").val().lastIndexOf(".")+2>=($("#mail").val().length)){
         $("label[for='mail']").attr("style","color:red; font-weight:bold");
@@ -168,16 +171,19 @@ $("form").submit(function(){
         status = false;
     }
     
+    //T-shirt info section
     if($("#design").val()==="Select Theme"){
         $(".shirt legend").append("<span style='color: red; font-weight:bold'> (Don't forget to pick a T-shirt)</span>");
         status = false;
     }
     
+    //activities section
     if(checkboxStatus($(".activities :checked"))==false){
         $(".activities legend").append("<span style='color: red; font-weight:bold'> (please select an Activity)</span>");
         status = false;
     }
     
+    //payment section
     if($("#payment").val()==="credit card"){
         if($("#cc-num").val()==""|| $("#cc-num").val().length<13|| $("#cc-num").val().length>16|| isNaN($("#cc-num").val())==true){
             $("label[for='cc-num']").attr("style","color:red; font-weight:bold");
@@ -193,6 +199,7 @@ $("form").submit(function(){
            }
     }
     
+    //return the final status
     return status;
 });
 
